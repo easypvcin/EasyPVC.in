@@ -506,7 +506,7 @@ h1 {
     <img src="./img/logo.png" alt="Easy PVC Logo" style="height: 70px; margin-bottom: 10px;">
     <h1 style="margin: 0; color: #d40000; font-size: 28px;">EasyPVC.In</h1>
     <p style="margin: 2px 0; font-size: 14px; font-weight: 500;">Founder: Anil Kumar</p>
-    <p style="margin: 2px 0; font-size: 13px;">9588581750 | easypvc.in@gmail.com</p>
+    <p style="margin: 2px 0; font-size: 13px;">+91 9588581750 | easypvc.in@gmail.com</p>
     <hr style="margin-top: 15px; border: none; height: 1px; background: #ccc;">
   </div>
 
@@ -535,17 +535,18 @@ h1 {
 `;
 
   // Generate PDF
-  html2pdf().from(container).set({
-    margin: 10,
-    filename: `EasyPVC_Receipt_${orderId}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  }).save().then(() => {
-    document.body.removeChild(container);
-    document.body.removeChild(loader);
-  });
-};
+  document.body.appendChild(container); // Append the receipt to the DOM
+
+html2pdf().from(container).set({
+  margin: 10,
+  filename: `EasyPVC_Receipt_${orderId}.pdf`,
+  image: { type: 'jpeg', quality: 0.98 },
+  html2canvas: { scale: 2, useCORS: true },
+  jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+}).save().then(() => {
+  document.body.removeChild(container);
+  document.body.removeChild(loader);
+});
   
   window.onload = fetchOrders;
 </script>
