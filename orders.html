@@ -461,7 +461,7 @@ h1 {
   <p><strong>Order Time:</strong> ${order.createdAt}</p>
   <p><strong>UID:</strong> ${order.uid}</p>
 </div>
-              <button class="btn" onclick="downloadReceipt('${doc.id}')">📄 Download Receipt</button>
+              <button class="btn" onclick='generateReceipt("${doc.id}", ${JSON.stringify(order)})'>📄 Download Receipt</button>
             </div>`;
         });
         
@@ -475,7 +475,7 @@ h1 {
     });
   }
   
-  window.downloadReceipt = function(orderId, order) {
+  window.generateReceipt = function(orderId, order) {
   // Show loader
   const loader = document.createElement("div");
   loader.id = "receiptLoader";
