@@ -294,8 +294,7 @@ h1 {
   </nav>
   <main>
     <h1>Your Orders</h1>
-    <input type="text" id="searchInput" placeholder="Search by Name or Order ID" onkeyup="filterOrders()" />
-
+  
     <p id="errorMessage" class="error" style="display:none;"></p>
     
   <!-- Skeleton Loader Section -->
@@ -476,70 +475,73 @@ h1 {
     });
   }
   
-  window.downloadReceipt = function(orderId) {
-  const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);
-  if (!orderCard) {
-    alert("⚠️ Order not found!");
-    return;
-  }
-
-  alert("Generating your professional receipt. Please wait...");
-
-  // Access data attributes
-  const order = {
-    fullName: orderCard.dataset.fullname,
-    mobile: orderCard.dataset.mobile,
-    productName: orderCard.dataset.name,
-    price: orderCard.dataset.price,
-    address: orderCard.dataset.address,
-    paymentId: orderCard.dataset.paymentid,
-    paymentStatus: orderCard.dataset.paymentstatus,
-    pdfPassword: orderCard.dataset.pdfpassword,
-    createdAt: orderCard.dataset.createdat,
-    uid: orderCard.dataset.uid
-  };
+  window.downloadReceipt = function(orderId, order) {
+  // Show loader
+  const loader = document.createElement("div");
+  loader.id = "receiptLoader";
+  loader.innerHTML = `
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+      <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
+        <div style="border: 4px solid #f3f3f3; border-top: 4px solid #d40000; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: auto;"></div>
+        <p style="margin-top: 10px;">Generating Receipt...</p>
+      </div>
+    </div>
+    <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
+  `;
+  document.body.appendChild(loader);
 
   // Create receipt layout
   const container = document.createElement("div");
+  container.style.padding = "20px";
+  container.style.maxWidth = "700px";
+  container.style.margin = "20px auto";
+  container.style.fontFamily = "Arial, sans-serif";
+  container.style.background = "#fff";
+  container.style.border = "1px solid #ddd";
+  container.style.borderRadius = "8px";
+  container.style.color = "#333";
+
   container.innerHTML = `
-    <div style="font-family: Arial, sans-serif; padding: 20px; width: 600px; margin: auto; color: #333;">
-      <div style="text-align: center; margin-bottom: 20px;">
-        <img src="./img/logo.png" alt="Company Logo" style="height: 80px; margin-bottom: 10px;">
-        <h2 style="margin: 0;">EasyPVC.In</h2>
-        <p style="margin: 0;">Founder: Anil Kumar</p>
-        <p style="margin-top: 5px; font-size: 14px;">GSTIN: 27ABCDE1234F1Z5 | contact@easypvc.in</p>
-        <hr style="margin-top: 20px;">
-      </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="./img/logo.png" alt="Easy PVC Logo" style="height: 70px; margin-bottom: 10px;">
+      <h2 style="margin: 0; color: #d40000;">Easy PVC</h2>
+      <p style="margin: 2px 0; font-size: 14px;">Founder: Raj Sharma</p>
+      <p style="margin: 2px 0; font-size: 13px;">GSTIN: 27ABCDE1234F1Z5 | contact@easypvc.in</p>
+      <hr style="margin-top: 15px; border-color: #ccc;">
+    </div>
 
-      <h3 style="margin-bottom: 10px;">Order Receipt</h3>
-      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-        <tr><td><strong>Full Name:</strong></td><td>${order.fullName}</td></tr>
-        <tr><td><strong>Mobile:</strong></td><td>${order.mobile}</td></tr>
-        <tr><td><strong>Product Name:</strong></td><td>${order.productName}</td></tr>
-        <tr><td><strong>Price:</strong></td><td>${order.price}</td></tr>
-        <tr><td><strong>Shipping Address:</strong></td><td>${order.address}</td></tr>
-        <tr><td><strong>Payment ID:</strong></td><td>${order.paymentId}</td></tr>
-        <tr><td><strong>Payment Status:</strong></td><td>${order.paymentStatus}</td></tr>
-        <tr><td><strong>Password (if any):</strong></td><td>${order.pdfPassword}</td></tr>
-        <tr><td><strong>Order Date:</strong></td><td>${order.createdAt}</td></tr>
-        <tr><td><strong>User ID:</strong></td><td>${order.uid}</td></tr>
-      </table>
+    <h3 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Order Receipt</h3>
+    <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+      <tr><td><strong>Order ID:</strong></td><td>${orderId}</td></tr>
+      <tr><td><strong>Full Name:</strong></td><td>${order.fullName}</td></tr>
+      <tr><td><strong>Mobile:</strong></td><td>${order.mobile}</td></tr>
+      <tr><td><strong>Product Name:</strong></td><td>${order.name}</td></tr>
+      <tr><td><strong>Price:</strong></td><td>${order.price}</td></tr>
+      <tr><td><strong>Shipping Address:</strong></td><td>${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
+      <tr><td><strong>Payment ID:</strong></td><td>${order.paymentId}</td></tr>
+      <tr><td><strong>Payment Status:</strong></td><td>${order.paymentStatus}</td></tr>
+      <tr><td><strong>Password:</strong></td><td>${order.pdfPassword}</td></tr>
+      <tr><td><strong>Order Time:</strong></td><td>${order.createdAt}</td></tr>
+      <tr><td><strong>User ID:</strong></td><td>${order.uid}</td></tr>
+    </table>
 
-      <div style="margin-top: 30px; text-align: center;">
-        <p style="font-size: 16px;">Thank you for your order!</p>
-        <p style="font-size: 14px; color: #666;">We appreciate your trust in Easy PVC. We hope to serve you again soon.</p>
-      </div>
+    <div style="margin-top: 30px; text-align: center;">
+      <p style="font-size: 15px; font-weight: bold;">Thank you for shopping with Easy PVC!</p>
+      <p style="font-size: 13px; color: #666;">We appreciate your trust in us and look forward to serving you again.</p>
     </div>
   `;
 
   // Generate PDF
   html2pdf().from(container).set({
-    margin: 0,
-    filename: `Receipt_${orderId}.pdf`,
-    image: { type: "jpeg", quality: 1 },
+    margin: 10,
+    filename: `EasyPVC_Receipt_${orderId}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-  }).save();
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).save().then(() => {
+    document.body.removeChild(container);
+    document.body.removeChild(loader);
+  });
 };
   
   window.onload = fetchOrders;
