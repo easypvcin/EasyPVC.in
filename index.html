@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Favicon -->
+<link rel="icon" href="./img/logo.png" type="image/x-icon">
+<title>EasyPVC.In - Affordable PVC Card Printing & Fast Delivery</title>
+    <link rel="stylesheet" href="./css/styles.css" type="text/css" media="all" />
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f8f8f8; color: #333; }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="./img/logo.png" alt="easy pvc Logo">  <!-- Replace with your logo -->
+<span id="userEmail" style="display:none; font-weight: bold;"></span>
+        </div>
+        <ul class="nav-links">
+               <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="orders.html">Orders</a></li>
+    <li><a href="contact.html">Contact</a></li>
+            
+      <li id="authLinks">
+   <!-- ✅ Yahan Firebase Auth Ke Basis Pe Button Change Hoga -->
+   <a href="login.html" id="loginBtn">Login</a></li>
+ <li id="authLinks"> 
+   <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+   <a href="signup.html" id="signupBtn">Signup</a>
+ </li>
+
+        </ul>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    </nav>
+<div class="nav-gap"></div>
+
+
+  <!-- Unique Hero Banner Section -->
+  <section class="hero-banner-section" id="hero-banner-entry">
+    <div class="hero-image-block">
+      <img src="./img/hero.png" alt="PVC Card Printing Machine" />
+      <div class="overlay-content-box">
+        <h1 class="headline-text">Professional PVC Card Printing</h1>
+        <p class="subtext-description">
+          Fast, secure and high-quality printing services for Aadhaar, PAN, ID cards, and more. Delivered to your doorstep.
+        </p>
+        <div class="cta-link-group">
+          <a href="#services">Explore Services</a>
+          <a href="about.html">About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unique Print Offer Cards -->
+  <section class="print-offers" id="print-offers">
+    <div class="offer-tile">
+      <div class="tile-icon">🗂️</div>
+      <h3 class="tile-heading">Govt ID PVC Cards</h3>
+      <p class="tile-description">Get Aadhaar, PAN, Voter ID, Driving License printed on long-lasting PVC cards.</p>
+    </div>
+    <div class="offer-tile">
+      <div class="tile-icon">📱</div>
+      <h3 class="tile-heading">QR Social Cards</h3>
+      <p class="tile-description">Your Instagram, YouTube, WhatsApp – now scannable on stylish PVC cards.</p>
+    </div>
+    <div class="offer-tile">
+      <div class="tile-icon">🏢</div>
+      <h3 class="tile-heading">Pro Biz/Membership</h3>
+      <p class="tile-description">Elegant PVC designs for clubs, brands, staff & premium memberships.</p>
+    </div>
+  </section>
+
+
+
+   <!-- Services Section --> 
+   <section id="services"  class="services">  
+  <h2>Our Services</h2>  
+  <div class="services-grid">  
+<!-- 1. Aadhar PVC Card -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/aadharq5PV_3.png" alt="aadhar">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>Aadhaar PVC Card<div class="price-tag">₹120</div></h3>
+    <p>Secure and durable PVC print of Aadhaar Card.</p>
+    <a href="aadhar.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 2. AYUSHMAN PVC Cards -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/AyushmanPV_3.png" alt="Ayushman Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>Ayushman PVC Card<div class="price-tag">₹120</div></h3>
+    <p>Premium quality Ayushman card print on PVC.</p>
+    <a href="ayushman.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 3. PAN Cards -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/pancard5PV_4.png" alt="PAN Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>PAN Card PVC<div class="price-tag">₹120</div></h3>
+    <p>PVC print of your PAN card in wallet size.</p>
+    <a href="pan.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 4. BJP Membership Cards -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/BJP membershipcard5PV_5.png" alt="BJP Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>BJP Membership PVC<div class="price-tag">₹120</div></h3>
+    <p>Official BJP membership card in PVC format.</p>
+    <a href="bjp.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 5. Driving Licence PVC -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/DLPV_1.png" alt="Driving Licence">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>Driving Licence PVC<div class="price-tag">₹120</div></h3>
+    <p>PVC print of your DL in wallet-friendly size.</p>
+    <a href="dl.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+<!-- 6. Health ID PVC Card -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/HealthIDPV_1.png" alt="Health ID Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>Health ID PVC Card<div class="price-tag">₹120</div></h3>
+    <p>Durable PVC print of your Health ID card.</p>
+    <a href="healthid.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 7. INC Membership PVC -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/CongressMe_4.png" alt="INC Membership Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>INC Membership PVC<div class="price-tag">₹120</div></h3>
+    <p>Printed INC party membership card in PVC.</p>
+    <a href="inc.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 8. Ration PVC Card -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/RationPV_1.png" alt="Ration Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>Ration Card PVC<div class="price-tag">₹120</div></h3>
+    <p>Compact PVC print of your Ration Card.</p>
+    <a href="ration.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 9. RC Card PVC -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/RCPV_1.png" alt="RC Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>RC PVC Card<div class="price-tag">₹120</div></h3>
+    <p>PVC printed version of your Registration Certificate.</p>
+    <a href="rc.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 10. UAN PVC Card -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/UANPV_5.png" alt="UAN Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>UAN PVC Card<div class="price-tag">₹120</div></h3>
+    <p>Wallet size UAN card printed on PVC.</p>
+    <a href="uan.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 11. UTP PVC Card -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/UniversalT_3.png" alt="UTP Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>UTP PVC Card<div class="price-tag">₹120</div></h3>
+    <p>Professional UTP card in durable PVC format.</p>
+    <a href="utp.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+<!-- 12. Voter ID PVC Card -->
+<div class="service-card show">
+  <div class="gift-tag"><span class="gift-icon">🎁</span> Free Gift Included</div>
+  <div class="card-image">
+    <img src="./img/Voter IDPV_1.png" alt="Voter ID Card">
+  </div>
+  <div class="card-content">
+    <p class="highlight-deal">Get 2 Covers Free!</p>
+    <h3>Voter ID PVC Card<div class="price-tag">₹120</div></h3>
+    <p>High-quality print of your Voter ID on PVC.</p>
+    <a href="voterid.html" class="btn-order">Order Now</a>
+  </div>
+</div>
+
+
+  </div>  
+</section>  
+
+
+<!-- Our Streamlined Service Process -->
+<section class="service-process">
+  <h2>Our Streamlined Service Process</h2>
+  <p>We ensure a smooth, hassle-free service experience from order to delivery.</p>
+  
+  <div class="process-container">
+    <div class="process-box">
+      <div class="circle red">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/online-store.png" />
+      </div>
+      <h3>Select Service</h3>
+    </div>
+    
+    <div class="arrow">➔</div>
+    
+    <div class="process-box">
+      <div class="circle white">
+        <img src="https://img.icons8.com/ios-filled/50/d32f2f/upload.png" />
+      </div>
+      <h3>Upload Documents</h3>
+    </div>
+    
+    <div class="arrow">➔</div>
+    
+    <div class="process-box">
+      <div class="circle red">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/money.png" />
+      </div>
+      <h3>Make Payment</h3>
+    </div>
+    
+    <div class="arrow">➔</div>
+    
+    <div class="process-box">
+      <div class="circle white">
+        <img src="https://img.icons8.com/ios-filled/50/d32f2f/checked.png" />
+      </div>
+      <h3>Team Checks Your Documents</h3>
+    </div>
+    
+    <div class="arrow">➔</div>
+    
+    <div class="process-box">
+      <div class="circle red">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/print.png" />
+      </div>
+      <h3>High-Quality Print</h3>
+    </div>
+    
+    <div class="arrow">➔</div>
+    
+    <div class="process-box">
+      <div class="circle white">
+        <img src="https://img.icons8.com/ios-filled/50/d32f2f/box.png" />
+      </div>
+      <h3>Secure Packaging</h3>
+    </div>
+    
+    <div class="arrow">➔</div>
+    
+    <div class="process-box">
+      <div class="circle red">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/delivery.png" />
+      </div>
+      <h3>Doorstep Delivery</h3>
+    </div>
+  </div>
+</section>
+
+<section class="rotating-showcase" id="rotating-gallery">
+<div class="carousel-wrapper">
+  <span style="--i: 1"><img src="./gallery/pre1.png" alt="Card 1" /></span>
+  <span style="--i: 2"><img src="./gallery/pre2.png" alt="Card 2" /></span>
+  <span style="--i: 3"><img src="./gallery/pre3.png" alt="Card 3" /></span>
+  <span style="--i: 4"><img src="./gallery/pre4.png" alt="Card 4" /></span>
+  <span style="--i: 5"><img src="./gallery/pre5.png" alt="Card 5" /></span>
+  <span style="--i: 6"><img src="./gallery/pre6.png" alt="Card 6" /></span>
+  <span style="--i: 7"><img src="./gallery/pre7.png" alt="Card 7" /></span>
+  <span style="--i: 8"><img src="./gallery/pre8.png" alt="Card 8" /></span>
+  <span style="--i: 9"><img src="./gallery/pre9.png" alt="Card 9" /></span>
+</div>
+
+  <div class="carousel-controls">
+    <button class="nav-btn" id="carousel-prev">Prev</button>
+    <button class="nav-btn" id="carousel-next">Next</button>
+  </div>
+</section>
+
+
+
+<section id="testimonials" style="background: #fff; padding: 60px 20px; max-width: 1000px; margin: auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+    <!-- Smiley Image -->
+    <div style="flex: 0 0 auto;">
+        <img src="https://webwallah.in/wp-content/uploads/2024/04/smile.png" alt="Smiley" style="width: 100px; height: auto; display: block;">
+    </div>
+
+    <!-- Text Content -->
+    <div style="flex: 1; min-width: 250px;">
+        <h2 style="font-size: 2.5rem; font-weight: bold; color: #111; margin-bottom: 5px;">
+            Your Exceptional
+        </h2>
+        <h2 style="font-size: 2.5rem; font-weight: bold; color: #E55039; margin-bottom: 10px;">
+            Love & Support
+        </h2>
+        <p style="color: #333; font-size: 1.2rem; margin-bottom: 30px;">For our work</p>
+    </div>
+
+
+
+<!-- Testimonials Section -->
+<section style="width: 100%; max-width: 1000px; margin: auto;">
+    <script src="https://widget.senja.io/widget/a599f764-2aa6-4106-aeed-142581e46646/platform.js" type="text/javascript" async></script>
+    <div class="senja-embed" data-id="a599f764-2aa6-4106-aeed-142581e46646" data-mode="shadow" data-lazyload="false" style="display: block;"></div>
+</section>
+</section>
+
+
+
+
+
+
+
+
+<!-- FAQs Section -->
+<section id="faqs" class="faqs">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-container">
+      
+<div class="faq-item">
+            <div class="faq-question">👨 Who is the founder of EasyPVC.In?<span class="arrow">+</span></div>
+            <div class="faq-answer">Mr.Anil Kumar is the founder of EasyPVC.in, Who is a young entrepreneur.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">📌 How do I place an order? <span class="arrow">+</span></div>
+            <div class="faq-answer">You can place an order by selecting the service, uploading the required documents, and making the payment.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">📂 What type of documents can I upload? <span class="arrow">+</span></div>
+            <div class="faq-answer">You can upload JPGs, and PNGs for printing. Make sure the quality is high for the best results.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">💳 What payment methods do you accept? <span class="arrow">+</span></div>
+            <div class="faq-answer">We accept payments through UPI, credit/debit cards, net banking, and digital wallets.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">🚚 How long does delivery take? <span class="arrow">+</span></div>
+            <div class="faq-answer">Standard delivery takes 3-5 working days. Express delivery options are also available.</div>
+        </div>
+
+        
+
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="reach" style="background: #f9f9f9; padding: 60px 20px; font-family: 'Segoe UI', sans-serif;">
+  <div style="max-width: 1200px; margin: auto; text-align: center;">
+    <h2 style="font-size: 36px; color: #333; margin-bottom: 40px;">Get in Touch</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+      
+      <!-- Contact Card -->
+      <a href="https://wa.me/919588581750?text=Hello,%20I%20am%20interested%20in%20your%20services" class="contact-card" style="text-decoration: none; color: inherit;">
+        <div style="background: #ffffff; border-radius: 12px; padding: 30px 20px; width: 260px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+          <img src="https://founder0techsolvy.github.io/Imgsparsh/wa.png" alt="WhatsApp" style="width: 50px; margin-bottom: 15px;">
+          <h3 style="color: #25D366;">WhatsApp</h3>
+          <p style="font-size: 16px;">+91 95885 81750</p>
+        </div>
+      </a>
+      
+      <!-- Phone -->
+      <a href="tel:+919588581750" class="contact-card" style="text-decoration: none; color: inherit;">
+        <div style="background: #ffffff; border-radius: 12px; padding: 30px 20px; width: 260px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+          <img src="https://founder0techsolvy.github.io/Imgsparsh/phone.png" alt="Phone" style="width: 50px; margin-bottom: 15px;">
+          <h3 style="color: #F44336;">Phone</h3>
+          <p style="font-size: 16px;">+91 95885 81750</p>
+        </div>
+      </a>
+      
+      <!-- Email -->
+      <a href="mailto:easypvc.in@gmail.com?subject=Inquiry" class="contact-card" style="text-decoration: none; color: inherit;">
+        <div style="background: #ffffff; border-radius: 12px; padding: 30px 20px; width: 260px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+          <img src="https://founder0techsolvy.github.io/Imgsparsh/email.png" alt="Email" style="width: 50px; margin-bottom: 15px;">
+          <h3 style="color: #3F51B5;">Email</h3>
+          <p style="font-size: 16px;">easypvc.in@gmail.com</p>
+        </div>
+      </a>
+      
+      <!-- Address -->
+      <a href="https://maps.app.goo.gl/ArNzGTrWzGwka9G56" class="contact-card" style="text-decoration: none; color: inherit;">
+        <div style="background: #ffffff; border-radius: 12px; padding: 30px 20px; width: 260px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+          <img src="https://founder0techsolvy.github.io/Imgsparsh/address.png" alt="Address" style="width: 50px; margin-bottom: 15px;">
+          <h3 style="color: #9C27B0;">Address</h3>
+          <p style="font-size: 16px; line-height: 1.4;">
+            Near Ambedkar Park,<br> Old Bus Stand Bawal,<br> Rasiawas Road, Bawal,<br> Rewari, Haryana 123501
+          </p>
+        </div>
+      </a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- Optional Hover Effect Script -->
+<style>
+  .contact-card div:hover {
+    transform: translateY(-10px);
+  }
+</style>
+<!-- Footer Section -->
+<footer>
+    <div class="footer-overlay"></div> <!-- Animated Background Overlay -->
+
+    <!-- Top Section with Title & Description -->
+    <div class="footer-intro">
+        <h2>Print420.in By Mr.Ravi Kumar Singh</h2>
+        <div class="underline"></div>
+        <p>Providing high-quality ID card printing, passport photos, and document printing services with fast delivery.</p>
+    </div>
+
+    <div class="footer-container">
+
+        <!-- Left Section - Quick Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html#faqs">FAQs</a></li>
+                <li><a href="index.html#testimonials">Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Middle Section - Services -->
+        <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul>
+<li><a href="#">DL Card Printing</a></li>
+<li><a href="#">RC Card Printing</a></li>
+<li><a href="#">PAN Card Printing</a></li>
+<li><a href="#">Voter ID Printing</a></li>
+<li><a href="#">Passport Size Photos</a></li>
+<li><a href="#">Aadhar Card Printing</a></li>
+<li><a href="#">Ration Card Printing</a></li>
+<li><a href="#">Ayushman Card Printing</a></li>
+<li><a href="#">E-Shram Card Printing</a></li>
+<li><a href="#">ABC Card Printing</a></li>
+<li><a href="#">UAN Card Printing</a></li>
+
+            </ul>
+        </div>
+
+        <!-- Right Section - Contact Info -->
+        <div class="footer-section">
+            <h3>Contact Information</h3>
+            <p><a href="tel:+917061171033">+91 70611 71033</a></p>
+            <p><a href="mailto:pvcprint420@gmail.com">pvcprint420@gmail.com</a></p>
+            <p>Akhauripur gola, Chausa, Buxar, Bihar -802114</p>
+            
+            <!-- Social Media Icons -->
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/17tV2vj9id/"><img src="https://img.icons8.com/ios-filled/50/FF0000/facebook-new.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/ravivlogs420?igsh=MWI3amdrN2hhaTE4ZA=="><img src="https://img.icons8.com/ios-filled/50/FF0000/instagram.png" alt="Instagram"></a>
+                <a href="https://youtube.com/@ravivlogs420?si=cqnBWtovZ2E4j4t9"><img src="https://img.icons8.com/ios-filled/50/FF0000/youtube.png" alt="YouTube"></a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Print 420. All Rights Reserved.</p>
+      <p>
+  By placing an order, you agree to our  
+  <a href="terms.html" class="policy-link">Terms & Conditions</a>,  
+  <a href="privacy-policy.html" class="policy-link">Privacy Policy</a>,  
+  <a href="refund-policy.html" class="policy-link">Refund & Return Policy</a>, and  
+  <a href="shipping-policy.html" class="policy-link">Shipping Policy</a>.
+</p>
+
+<style>
+  /* Force the links to be clickable */
+  .policy-link {
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 9999 !important;
+    display: inline-block !important;
+    color: blue !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+  }
+</style>
+
+<script>
+  // Ensure clicking always works
+  document.querySelectorAll(".policy-link").forEach(link => {
+    link.addEventListener("click", function (event) {
+      event.stopPropagation(); // Stop interference from other scripts
+      console.log("Clicked: ", this.href);
+    });
+  });
+</script>
+    </div>
+</footer>
+
+
+
+<script src="./js/main.js">main.js</script>
+<script type="module" src="./js/auth.js"></script>
+
+</body>
+</html>
