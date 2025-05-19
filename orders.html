@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Orders</title>
+  <title>Your Orders || EasyPVC.In</title>
   <style>
 * {
   margin: 0;
@@ -476,41 +476,67 @@ h1 {
   }
   
   window.downloadReceipt = function(orderId) {
-    const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);
-    if (!orderCard) {
-      alert("⚠️ Order not found!");
-      return;
-    }
-    
-    alert("Generating your receipt PDF. Please wait...");
-    
-    const clonedCard = orderCard.cloneNode(true);
-    clonedCard.style.width = "100%";
-    clonedCard.style.padding = "20px";
-    clonedCard.style.fontSize = "16px";
-    
-    const container = document.createElement("div");
-    container.style.width = "600px";
-    container.style.margin = "auto";
-    container.style.background = "#fff";
-    container.style.padding = "20px";
-    
-    const logo = document.createElement("img");
-    logo.src = "./img/logo.png";
-    logo.alt = "Easy PVC";
-    logo.style.width = "150px";
-    logo.style.marginBottom = "20px";
-    container.appendChild(logo);
-    container.appendChild(clonedCard);
-    
-    html2pdf().from(container).set({
-      margin: 10,
-      filename: `Receipt_${orderId}.pdf`,
-      image: { type: "jpeg", quality: 1.0 },
-      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-    }).save();
+  const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);
+  if (!orderCard) {
+    alert("⚠️ Order not found!");
+    return;
+  }
+
+  alert("Generating your professional receipt. Please wait...");
+
+  const order = {
+    fullName: orderCard.querySelector("p:nth-child(2)").textContent.split(": ")[1],
+    mobile: orderCard.querySelector("p:nth-child(3)").textContent.split(": ")[1],
+    productName: orderCard.querySelector("p:nth-child(4)").textContent.split(": ")[1],
+    price: orderCard.querySelector("p:nth-child(5)").textContent.split(": ")[1],
+    address: orderCard.querySelector("p:nth-child(6)").textContent.split(": ")[1],
+    paymentId: orderCard.querySelector("p:nth-child(7)").textContent.split(": ")[1],
+    paymentStatus: orderCard.querySelector("p:nth-child(8)").textContent.split(": ")[1],
+    pdfPassword: orderCard.querySelector("p:nth-child(9)").textContent.split(": ")[1],
+    createdAt: orderCard.querySelector("p:nth-child(10)").textContent.split(": ")[1],
+    uid: orderCard.querySelector("p:nth-child(11)").textContent.split(": ")[1]
   };
+
+  const container = document.createElement("div");
+  container.innerHTML = `
+    <div style="font-family: Arial, sans-serif; padding: 20px; width: 600px; margin: auto; color: #333;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="./img/logo.png" alt="Company Logo" style="height: 80px; margin-bottom: 10px;">
+        <h2 style="margin: 0;">Easy PVC</h2>
+        <p style="margin: 0;">Founder: Raj Sharma</p>
+        <p style="margin-top: 5px; font-size: 14px;">GSTIN: 27ABCDE1234F1Z5 | contact@easypvc.in</p>
+        <hr style="margin-top: 20px;">
+      </div>
+
+      <h3 style="margin-bottom: 10px;">Order Receipt</h3>
+      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <tr><td><strong>Full Name:</strong></td><td>${order.fullName}</td></tr>
+        <tr><td><strong>Mobile:</strong></td><td>${order.mobile}</td></tr>
+        <tr><td><strong>Product Name:</strong></td><td>${order.productName}</td></tr>
+        <tr><td><strong>Price:</strong></td><td>${order.price}</td></tr>
+        <tr><td><strong>Shipping Address:</strong></td><td>${order.address}</td></tr>
+        <tr><td><strong>Payment ID:</strong></td><td>${order.paymentId}</td></tr>
+        <tr><td><strong>Payment Status:</strong></td><td>${order.paymentStatus}</td></tr>
+        <tr><td><strong>Password (if any):</strong></td><td>${order.pdfPassword}</td></tr>
+        <tr><td><strong>Order Date:</strong></td><td>${order.createdAt}</td></tr>
+        <tr><td><strong>User ID:</strong></td><td>${order.uid}</td></tr>
+      </table>
+
+      <div style="margin-top: 30px; text-align: center;">
+        <p style="font-size: 16px;">Thank you for your order!</p>
+        <p style="font-size: 14px; color: #666;">We appreciate your trust in Easy PVC. We hope to serve you again soon.</p>
+      </div>
+    </div>
+  `;
+
+  html2pdf().from(container).set({
+    margin: 0,
+    filename: `Receipt_${orderId}.pdf`,
+    image: { type: "jpeg", quality: 1 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+  }).save();
+};
   
   window.onload = fetchOrders;
 </script>
