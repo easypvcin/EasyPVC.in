@@ -534,8 +534,8 @@ h1 {
   </div>
 `;
 
-  // Generate PDF
-  
+  // Generate Pdf 
+document.body.appendChild(container); // Append the receipt to the DOM
 
 html2pdf().from(container).set({
   margin: 10,
