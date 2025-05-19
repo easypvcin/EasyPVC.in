@@ -18,82 +18,69 @@ body {
   padding-top: 80px;
 }
 
-/* Navbar */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #fff;
-  border-bottom: 2px solid #d40000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 10%;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
-  z-index: 999;
+        .navbar { 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px 10%; background: white; 
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
+            z-index: 1000;
+        }
+ 
+        .navbar {
+    border-bottom: 1px solid #FF0000;  /* Change color as needed */
 }
+        .logo img { height: 40px; }
 
-.logo img {
-  height: 40px;
-}
+        .nav-links { 
+            list-style: none; 
+            display: flex; gap: 20px; 
+        }
+        .nav-links li { display: inline; }
+        .nav-links a { 
+            color: #333; text-decoration: none; font-size: 16px; font-weight: bold; 
+        }
+       
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
+        /* Hamburger Menu */
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: red;
+        }
 
-.nav-links a {
-  text-decoration: none;
-  font-weight: 600;
-  color: #d40000;
-  transition: 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #a00000;
-}
-
-.btn-login {
-  background: #d40000;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 6px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s ease;
-}
-
-.btn-login:hover {
-  background: #a00000;
-}
-
-.menu-icon {
-  display: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #d40000;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    background: white;
-    flex-direction: column;
-    width: 100%;
-    display: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .menu-icon {
-    display: block;
-  }
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .menu-icon { display: block; position: relative; z-index: 1100; }
+            
+            .nav-links { 
+                position: absolute; top: 75px; right: 0; 
+                background: white; width: 100%; 
+                flex-direction: column; 
+                text-align: center; padding: 0;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                
+                /* Initially hidden */
+                height: 0;
+                overflow: hidden;
+                transition: height 0.5s ease-in-out;
+            }
+            .nav-links.active { height: auto; padding: 10px 0; }
+            
+            .nav-links li { padding: 10px; border-bottom: 1px solid #ddd; }
+        }
+       
+       #userEmail {
+    max-width: 180px;  /* ✅ Increased width */
+    overflow: hidden;  
+    text-overflow: ellipsis; /* ✅ Shows "..." when text overflows */
+    white-space: nowrap;  
+    display: inline-block;
+    font-size: 16px; /* ✅ Slightly bigger text */
+    font-weight: 500;
+    vertical-align: middle;
+    padding: 0 10px; /* ✅ Add some spacing */
 }
 
 /* Page Title */
@@ -211,19 +198,58 @@ h1 {
 /* Skeleton Loader */
 .skeleton-loader {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 20px;
 }
 
 .skeleton-card {
-  height: 160px;
-  width: 90%;
-  max-width: 320px;
+  background: white;
+  border: 1px solid #eee;
+  border-left: 5px solid #ccc;
+  border-radius: 10px;
+  width: 300px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-img {
+  height: 150px;
+  border-radius: 8px;
   background: linear-gradient(-90deg, #eee 0%, #f8f8f8 50%, #eee 100%);
   background-size: 400% 400%;
   animation: shimmer 1.3s infinite ease-in-out;
-  border-radius: 10px;
+}
+
+.skeleton-text {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(-90deg, #eee 0%, #f8f8f8 50%, #eee 100%);
+  background-size: 400% 400%;
+  animation: shimmer 1.3s infinite ease-in-out;
+}
+
+.skeleton-text.short {
+  width: 40%;
+}
+
+.skeleton-text.medium {
+  width: 70%;
+}
+
+.skeleton-text.full {
+  width: 100%;
+}
+
+.skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 @keyframes shimmer {
@@ -234,32 +260,114 @@ h1 {
 </head>
 
 <body>
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
-      <img src="./img/logo.png" alt="Logo" />
+      <img src="./img/logo.png" alt="Print 420 Logo"> <!-- Replace with your logo -->
+      <span id="userEmail" style="display:none; font-weight: bold;"></span>
     </div>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="index.html#services">Services</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html">About Us</a></li>
       <li><a href="orders.html">Orders</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="btn-login">Login</a></li>
+      
+      <li id="authLinks">
+        <!-- ✅ Yahan Firebase Auth Ke Basis Pe Button Change Hoga -->
+        <a href="login.html" id="loginBtn">Login</a>
+      </li>
+      <li id="authLinks">
+        <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+        <a href="signup.html" id="signupBtn">Signup</a>
+      </li>
+      
     </ul>
-    <div class="menu-icon" onclick="document.getElementById('navLinks').classList.toggle('active')">☰</div>
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
   </nav>
-
   <main>
     <h1>Your Orders</h1>
     <input type="text" id="searchInput" placeholder="Search by Name or Order ID" onkeyup="filterOrders()" />
     <div id="loader" class="loader">Loading...</div>
-    <div id="skeletonLoader" class="skeleton-loader" style="display: none;">
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-    </div>
     <p id="errorMessage" class="error" style="display:none;"></p>
     <div class="orders-container" id="ordersContainer"></div>
+    
+  <!-- Skeleton Loader Section -->
+<div class="skeleton-loader" id="skeleton-loader">
+  <!-- Repeat skeleton-card 4 times -->
+
+  <div class="skeleton-card">
+    <div class="skeleton-img"></div>
+    <div class="skeleton-content">
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+  </div>
+
+  <div class="skeleton-card">
+    <div class="skeleton-img"></div>
+    <div class="skeleton-content">
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+  </div>
+
+  <div class="skeleton-card">
+    <div class="skeleton-img"></div>
+    <div class="skeleton-content">
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+  </div>
+
+  <div class="skeleton-card">
+    <div class="skeleton-img"></div>
+    <div class="skeleton-content">
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text short"></div>
+    </div>
+  </div>
+
+  <div class="skeleton-card">
+    <div class="skeleton-img"></div>
+    <div class="skeleton-content">
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+    </div>
+  </div>
+
+  <div class="skeleton-card">
+    <div class="skeleton-img"></div>
+    <div class="skeleton-content">
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text short"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+      <div class="skeleton-text medium"></div>
+      <div class="skeleton-text full"></div>
+    </div>
+  </div>
+</div>
   </main>
 
   <footer class="footer">
@@ -278,15 +386,15 @@ h1 {
     const auth = getAuth();  
     const db = getFirestore();  
   
-    function showLoader() {  
-      document.getElementById("loader").style.display = "block";  
-      document.getElementById("skeletonLoader").style.display = "flex";  
-    }  
-  
-    function hideLoader() {  
-      document.getElementById("loader").style.display = "none";  
-      document.getElementById("skeletonLoader").style.display = "none";  
-    }  
+    function showLoader() {
+  document.getElementById("loader").style.display = "block";
+  document.getElementById("skeleton-loader").style.display = "flex";
+}
+
+function hideLoader() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("skeleton-loader").style.display = "none";
+}
   
     function showError(message) {  
       const errorElem = document.getElementById("errorMessage");  
@@ -330,15 +438,13 @@ h1 {
   
             if (order.image1 && order.image2) {  
               fileHTML = `<div class="image-container">  
-                <img src="${order.image1}" alt="Order Image 1" class="order-img">  
-                <img src="${order.image2}" alt="Order Image 2" class="order-img">  
+                <img src="${order.image1}" alt="NILL" class="order-img">  
+                <img src="${order.image2}" alt="NILL" class="order-img">  
               </div>`;  
             } else if (order.image1) {  
-              fileHTML = `<img src="${order.image1}" alt="Order Image" class="order-img single">`;  
-            } else if (order.pdfUrl) {  
-              fileHTML = `<div class="pdf-container">  
-                <iframe src="${order.pdfUrl}"></iframe>  
-              </div>`;  
+              fileHTML = `<img src="${order.image1}" alt="NILL" class="order-img single">`;  
+            } else if (order.pdfUrl) {
+fileHTML = <div class="pdf-container">     <iframe src="${order.pdfUrl}"></iframe>     </div>;
             } else {  
               fileHTML = `<p style="color: red;">No file uploaded.</p>`;  
             }  
@@ -362,7 +468,7 @@ h1 {
           document.getElementById("ordersContainer").innerHTML = ordersHTML;  
         } catch (error) {  
           hideLoader();  
-          showError("❌ Error loading orders: " + error.message);  
+          showError("⚠️ Error loading orders: " + error.message);  
         }  
       });  
     }  
@@ -370,7 +476,7 @@ h1 {
     window.downloadReceipt = function(orderId) {  
       const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);  
       if (!orderCard) {  
-        alert("❌ Order not found!");  
+        alert("⚠️ Order not found!");  
         return;  
       }  
   
@@ -389,7 +495,7 @@ h1 {
   
       const logo = document.createElement("img");  
       logo.src = "./img/logo.png";  
-      logo.alt = "Print 420 Logo";  
+      logo.alt = "Easy PVC";  
       logo.style.width = "150px";  
       logo.style.marginBottom = "20px";  
       container.appendChild(logo);  
@@ -397,7 +503,7 @@ h1 {
   
       html2pdf().from(container).set({  
         margin: 10,  
-        filename: `Receipt_${orderId.replace(/[^\w\s]/gi, '_')}.pdf`,  
+        filename: `Receipt_${orderId}.pdf`,  
         image: { type: "jpeg", quality: 1.0 },  
         html2canvas: { scale: 2, useCORS: true, scrollY: 0 },  
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }  
@@ -411,10 +517,26 @@ h1 {
         alert("✅ Logged out successfully!");  
         window.location.href = "login.html";  
       }).catch((error) => {  
-        alert("❌ Error logging out: " + error.message);  
+        alert("⚠️ Error logging out: " + error.message);  
       });  
     });  
+    
+    
+
   </script>  
     <script type="module" src="./js/auth.js">./js/auth.js</script>  
+    <script> //menu bar 
+        function toggleMenu() {
+            let nav = document.querySelector(".nav-links");
+            let menuIcon = document.querySelector(".menu-icon");
+            
+            if (nav.style.height === "0px" || nav.style.height === "") {
+                nav.style.height = nav.scrollHeight + "px";  // Auto height
+                menuIcon.innerHTML = "✖";
+            } else {
+                nav.style.height = "0px";
+                menuIcon.innerHTML = "☰";
+            }
+        }</script>
 </body>
 </html>
