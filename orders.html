@@ -126,7 +126,13 @@ h1 {
   width: 48%;
   height: 150px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0px;
+}
+.order-pdf {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0px;
 }
 
 .order-img.single {
@@ -288,11 +294,11 @@ h1 {
   <main>
     <h1>Your Orders</h1>
     <input type="text" id="searchInput" placeholder="Search by Name or Order ID" onkeyup="filterOrders()" />
-    <div id="loader" class="loader">Loading...</div>
+
     <p id="errorMessage" class="error" style="display:none;"></p>
-    <div class="orders-container" id="ordersContainer"></div>
     
   <!-- Skeleton Loader Section -->
+  <div class="orders-container" id="ordersContainer">
 <div class="skeleton-loader" id="skeleton-loader">
   <!-- Repeat skeleton-card 4 times -->
 
@@ -375,155 +381,139 @@ h1 {
   </footer>
 
   <!-- Scripts remain unchanged (Firebase, html2pdf, etc.) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>  
-  <script type="module">  
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";  
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";  
-    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";  
-    import { firebaseConfig } from "./js/firebase.js";  
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+  import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+  import { firebaseConfig } from "./js/firebase.js";
   
-    const app = initializeApp(firebaseConfig);  
-    const auth = getAuth();  
-    const db = getFirestore();  
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const db = getFirestore();
   
-    function showLoader() {
-  document.getElementById("loader").style.display = "block";
-  document.getElementById("skeleton-loader").style.display = "flex";
-}
-
-function hideLoader() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("skeleton-loader").style.display = "none";
-}
+  function showLoader() {
+    document.getElementById("skeleton-loader").style.display = "flex";
+  }
   
-    function showError(message) {  
-      const errorElem = document.getElementById("errorMessage");  
-      errorElem.textContent = message;  
-      errorElem.style.display = "block";  
-    }  
+  function hideLoader() {
+    document.getElementById("skeleton-loader").style.display = "none";
+  }
   
-    function filterOrders() {  
-      const input = document.getElementById("searchInput").value.toLowerCase();  
-      const orders = document.getElementsByClassName("order-card");  
-      Array.from(orders).forEach((order) => {  
-        const name = order.querySelector(".order-details p:nth-child(2)").textContent.toLowerCase();  
-        const orderId = order.getAttribute("data-order-id").toLowerCase();  
-        order.style.display = name.includes(input) || orderId.includes(input) ? "" : "none";  
-      });  
-    }  
+  function showError(message) {
+    const errorElem = document.getElementById("errorMessage");
+    errorElem.textContent = message;
+    errorElem.style.display = "block";
+  }
   
-    function fetchOrders() {  
-      showLoader();  
-      onAuthStateChanged(auth, async (user) => {  
-        if (!user) {  
-          hideLoader();  
-          showError("⚠️ Please login to view your orders.");  
-          return;  
-        }  
+  function fetchOrders() {
+    showLoader();
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        hideLoader();
+        showError("⚠️ Please login to view your orders.");
+        return;
+      }
+      
+      try {
+        const ordersQuery = query(collection(db, "orders"), where("uid", "==", user.uid));
+        const querySnapshot = await getDocs(ordersQuery);
+        
+        let ordersHTML = "";
+        
+        if (querySnapshot.empty) {
+          hideLoader();
+          showError("❌ No orders found!");
+          return;
+        }
+        
+        querySnapshot.forEach((doc) => {
+          const order = doc.data();
+          let fileHTML = "";
+          
+          if (order.image1 && order.image2) {
+            fileHTML = `<div class="image-container">
+              <img src="${order.image1}" alt="Image 1" class="order-img">
+              <img src="${order.image2}" alt="Image 2" class="order-img">
+            </div>`;
+          } else if (order.image1) {
+            fileHTML = `<img src="${order.image1}" alt="Single Image" class="order-img single">`;
+          } else if (order.pdfUrl) {
+            fileHTML = `<div>
+              <iframe class="order-pdf" src="${order.pdfUrl}" border: 1px solid #ccc;"></iframe>
+            </div>`;
+          } else {
+            fileHTML = `<p style="color: red;">No file uploaded.</p>`;
+          }
+          
+          ordersHTML += `
+            <div class="order-card" data-order-id="${doc.id}">
+              ${fileHTML}
+<div class="order-details">
+  <p><strong>Order ID:</strong> ${doc.id}</p>
+  <p><strong>Full Name:</strong> ${order.fullName}</p>
+  <p><strong>Mobile:</strong> ${order.mobile}</p>
+  <p><strong>Product Name:</strong> ${order.name}</p>
+  <p><strong>Price:</strong> ${order.price}</p>
+  <p><strong>Address:</strong> ${order.address}, ${order.city}, ${order.state}, ${order.pincode}</p>
+  <p><strong>Payment ID:</strong> ${order.paymentId}</p>
+  <p><strong>Payment Status:</strong> ${order.paymentStatus}</p>
+  <p><strong>Password:</strong> ${order.pdfPassword}</p>
+  <p><strong>Order Time:</strong> ${order.createdAt}</p>
+  <p><strong>UID:</strong> ${order.uid}</p>
+</div>
+              <button class="btn" onclick="downloadReceipt('${doc.id}')">📄 Download Receipt</button>
+            </div>`;
+        });
+        
+        document.getElementById("ordersContainer").innerHTML = ordersHTML;
+        hideLoader();
+        
+      } catch (error) {
+        hideLoader();
+        showError("⚠️ Error loading orders: " + error.message);
+      }
+    });
+  }
   
-        try {  
-          const ordersQuery = query(collection(db, "orders"), where("uid", "==", user.uid));  
-          const querySnapshot = await getDocs(ordersQuery);  
-          hideLoader();  
-  
-          if (querySnapshot.empty) {  
-            showError("❌ No orders found!");  
-            return;  
-          }  
-  
-          let ordersHTML = "";  
-          querySnapshot.forEach((doc) => {  
-            const order = doc.data();  
-            let fileHTML = "";  
-  
-            if (order.image1 && order.image2) {  
-              fileHTML = `<div class="image-container">  
-                <img src="${order.image1}" alt="NILL" class="order-img">  
-                <img src="${order.image2}" alt="NILL" class="order-img">  
-              </div>`;  
-            } else if (order.image1) {  
-              fileHTML = `<img src="${order.image1}" alt="NILL" class="order-img single">`;  
-            } else if (order.pdfUrl) {
-fileHTML = <div class="pdf-container">     <iframe src="${order.pdfUrl}"></iframe>     </div>;
-            } else {  
-              fileHTML = `<p style="color: red;">No file uploaded.</p>`;  
-            }  
-  
-            ordersHTML += `  
-              <div class="order-card" data-order-id="${doc.id}">  
-                ${fileHTML}  
-                <div class="order-details">  
-                  <p><strong>Order ID:</strong> ${doc.id}</p>  
-                  <p><strong>Name:</strong> ${order.name}</p>  
-                  <p><strong>Price:</strong> ${order.price}</p>  
-                  <p><strong>Address:</strong> ${order.address}, ${order.city}, ${order.state}, ${order.pincode}</p>  
-                  <p><strong>Mobile:</strong> ${order.mobile}</p>  
-                  <p><strong>Payment ID:</strong> ${order.paymentId}</p>  
-                  <p><strong>Status:</strong> ${order.status}</p>  
-                </div>  
-                <button class="btn" onclick="downloadReceipt('${doc.id}')">📄 Download Receipt</button>  
-              </div>`;  
-          });  
-  
-          document.getElementById("ordersContainer").innerHTML = ordersHTML;  
-        } catch (error) {  
-          hideLoader();  
-          showError("⚠️ Error loading orders: " + error.message);  
-        }  
-      });  
-    }  
-  
-    window.downloadReceipt = function(orderId) {  
-      const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);  
-      if (!orderCard) {  
-        alert("⚠️ Order not found!");  
-        return;  
-      }  
-  
-      alert("Generating your receipt PDF. Please wait...");  
-  
-      const clonedCard = orderCard.cloneNode(true);  
-      clonedCard.style.width = "100%";  
-      clonedCard.style.padding = "20px";  
-      clonedCard.style.fontSize = "16px";  
-  
-      const container = document.createElement("div");  
-      container.style.width = "600px";  
-      container.style.margin = "auto";  
-      container.style.background = "#fff";  
-      container.style.padding = "20px";  
-  
-      const logo = document.createElement("img");  
-      logo.src = "./img/logo.png";  
-      logo.alt = "Easy PVC";  
-      logo.style.width = "150px";  
-      logo.style.marginBottom = "20px";  
-      container.appendChild(logo);  
-      container.appendChild(clonedCard);  
-  
-      html2pdf().from(container).set({  
-        margin: 10,  
-        filename: `Receipt_${orderId}.pdf`,  
-        image: { type: "jpeg", quality: 1.0 },  
-        html2canvas: { scale: 2, useCORS: true, scrollY: 0 },  
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }  
-      }).save();  
-    };  
-  
-    window.onload = fetchOrders;  
-  
-    document.getElementById("logoutBtn")?.addEventListener("click", () => {  
-      signOut(auth).then(() => {  
-        alert("✅ Logged out successfully!");  
-        window.location.href = "login.html";  
-      }).catch((error) => {  
-        alert("⚠️ Error logging out: " + error.message);  
-      });  
-    });  
+  window.downloadReceipt = function(orderId) {
+    const orderCard = document.querySelector(`[data-order-id="${orderId}"]`);
+    if (!orderCard) {
+      alert("⚠️ Order not found!");
+      return;
+    }
     
+    alert("Generating your receipt PDF. Please wait...");
     
-
-  </script>  
+    const clonedCard = orderCard.cloneNode(true);
+    clonedCard.style.width = "100%";
+    clonedCard.style.padding = "20px";
+    clonedCard.style.fontSize = "16px";
+    
+    const container = document.createElement("div");
+    container.style.width = "600px";
+    container.style.margin = "auto";
+    container.style.background = "#fff";
+    container.style.padding = "20px";
+    
+    const logo = document.createElement("img");
+    logo.src = "./img/logo.png";
+    logo.alt = "Easy PVC";
+    logo.style.width = "150px";
+    logo.style.marginBottom = "20px";
+    container.appendChild(logo);
+    container.appendChild(clonedCard);
+    
+    html2pdf().from(container).set({
+      margin: 10,
+      filename: `Receipt_${orderId}.pdf`,
+      image: { type: "jpeg", quality: 1.0 },
+      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+    }).save();
+  };
+  
+  window.onload = fetchOrders;
+</script>
     <script type="module" src="./js/auth.js">./js/auth.js</script>  
     <script> //menu bar 
         function toggleMenu() {
@@ -539,4 +529,4 @@ fileHTML = <div class="pdf-container">     <iframe src="${order.pdfUrl}"></ifram
             }
         }</script>
 </body>
-</html>
+  </html>
