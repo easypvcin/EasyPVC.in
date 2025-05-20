@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         userEmailDisplay.style.display = "inline-block"; // Show email
       }
     } else {
-      console.log("❌ User Logged Out");
+      console.log("⚠️ User Logged Out");
       loginBtn.style.display = "inline-block";
       signupBtn.style.display = "inline-block";
       logoutBtn.style.display = "none";
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("✅ Logged Out Successfully!");
       window.location.href = "index.html"; // ✅ Redirect to Home After Logout
     }).catch((error) => {
-      console.error("❌ Logout Error:", error);
+      console.error("⚠️ Logout Error:", error);
     });
   });
 });
@@ -126,3 +126,52 @@ auth.onAuthStateChanged((user) => {
     } 
   }
 });
+
+
+//bhai majboori h..... SCROLL DOWN WALA JS
+
+  const scrollBtn = document.getElementById("scrollToAddress");
+  const target = document.getElementById("shipping-container");
+  function scrollToTargetFast(target) {
+    const start = window.pageYOffset;
+    const end = target.getBoundingClientRect().top + start;
+    const distance = end - start;
+    const duration = 300; // 300 ms = fast scroll
+    const startTime = performance.now();
+    function animateScroll(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const scrollY = start + distance * progress;
+      window.scrollTo(0, scrollY);
+
+      if (progress < 1) {
+
+        requestAnimationFrame(animateScroll);
+
+      }
+
+    }
+   
+    requestAnimationFrame(animateScroll);
+
+  }
+
+  scrollBtn.addEventListener("click", function () {
+    if (target) {
+      scrollToTargetFast(target);
+
+
+      // Hide the button shortly after scrolling
+      setTimeout(() => {
+        scrollBtn.classList.add("hidden");
+      }, 400); // less delay because scroll is fast
+    }
+  });
+
+  // Show button again when scrolled away
+  window.addEventListener("scroll", function () {
+   const targetPosition = target.getBoundingClientRect().top;
+    if (targetPosition > 100 || targetPosition < -100) {
+      scrollBtn.classList.remove("hidden");
+    }
+  });
