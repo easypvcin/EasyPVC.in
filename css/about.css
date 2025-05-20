@@ -75,63 +75,91 @@
   height: 58px;
   /* Yeh value navbar ki height ke barabar set kar */
 }
-/* Hero Section */
-.hero {   
-    display: flex;   
-    align-items: center;   
-    justify-content: space-between;   
-    padding: 60px 5%;  
-    background: #FFEEEE; /* Light red background */
-    color: #660000; /* Dark red text */
-    border-radius: 0px;   
-    margin: 20px 0;   
-    flex-wrap: wrap;   
-    text-align: center;   
-    width: 100%;   
+/* General Reset & Typography Enhancements */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #fff8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+/* Hero Section - Premium Red Style */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #ff4d4d, #b30000);
+    color: #fff;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    animation: fadeInHero 1.2s ease-in;
+    border-radius: 0px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInHero {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Text Section */
-.hero-text { 
-    max-width: 50%; 
-    flex: 1;  
+.hero-text {
+    max-width: 50%;
+    flex: 1;
+    animation: fadeInText 1.5s ease-in;
 }
 
-.hero-text h1 { 
-    font-size: 42px; 
-    margin-bottom: 15px; 
+@keyframes fadeInText {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-.hero-text h2 { 
-    font-size: 28px;  
-    font-weight: bold;  
-    text-transform: uppercase;  
-    letter-spacing: 1px;  
-    color: #990000; /* Slightly darker shade for contrast */
-    margin-bottom: 10px;
+.hero-text h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+    font-weight: 800;
+    color: #fff;
 }
 
-.hero-text p { 
-    font-size: 18px; 
-    margin-bottom: 25px; 
+.hero-text h2 {
+    font-size: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #ffcccc;
+    margin-bottom: 15px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #f5f5f5;
 }
 
 /* Buttons */
 .btn {
-    background: #660000; /* Dark red */
-    color: white;
-    padding: 12px 20px;
-    border-radius: 5px;
+    background: #ffffff;
+    color: #b30000;
+    padding: 14px 24px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
     display: inline-block;
     margin: 5px;
     transition: 0.3s;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
 }
-
-.btn:hover { 
-    background: black; 
-    color: white; 
+.btn:hover {
+    background: #ffcccc;
+    color: #660000;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
 }
 
 /* Image Section */
@@ -144,188 +172,166 @@
     transform: translateX(-100%);
     transition: transform 1s ease-out, opacity 1s ease-out;
 }
-
-/* Animation Trigger */
 .hero-img.show {
     opacity: 1;
     transform: translateX(0);
 }
-
-/* Image Styling */
 .hero-img img {
     max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
     width: 100%;
     height: auto;
 }
 
-/* 📱 Responsive Fix */
-@media (max-width: 768px) {
-    .hero-img {
-        transform: translateX(-60%);
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 5%;
     }
-    .hero-img img {
-        max-width: 90%;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-img {
-        transform: translateX(-50%);
-    }
-}
-
-/* 🔥 Responsive Fixes */
-@media (max-width: 992px) {  
-    .hero { 
-        flex-direction: column;  
-        text-align: center; 
-        padding: 50px 5%;  
-    }  
-    .hero-text { 
-        max-width: 100%; 
-        margin-bottom: 20px;  
+    .hero-text {
+        max-width: 100%;
+        margin-bottom: 30px;
     }
     .hero-img img {
         max-width: 350px;
     }
-}  
-
-@media (max-width: 600px) {  
-    .hero-text h1 { 
-        font-size: 32px;
-    }  
-    .hero-text h2 { 
-        font-size: 24px;
-    }  
-    .hero-text p { 
-        font-size: 16px; 
-        margin-bottom: 20px; 
-    }  
-    .btn { 
-        padding: 10px 16px;
-    }  
-    .hero-img img {
-        max-width: 280px;
-    }
+}
+@media (max-width: 768px) {
+    .hero-img { transform: translateX(-60%); }
+    .hero-img img { max-width: 90%; }
+}
+@media (max-width: 600px) {
+    .hero-text h1 { font-size: 36px; }
+    .hero-text h2 { font-size: 22px; }
+    .hero-text p { font-size: 16px; margin-bottom: 25px; }
+    .btn { padding: 12px 18px; }
+    .hero-img img { max-width: 280px; }
+}
+@media (max-width: 480px) {
+    .hero-img { transform: translateX(-50%); }
+}
+/* Mission & Vision */
+.mission-vision {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px 10%;
+}
+.mission, .vision {
+    flex: 1;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.mission h2, .vision h2 {
+    color: #d40000;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-        /* ✅ Mission & Vision */
-        .mission-vision {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 10%;
-        }
-        .mission, .vision {
-            flex: 1;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .mission h2, .vision h2 { color: #d40000; font-size: 24px; margin-bottom: 10px; }
+/* Achievements with Animation */
+.achievements {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 10%;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.achievement {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.achievement span {
+    font-size: 40px;
+    color: #d40000;
+    animation: counterZoom 1.5s ease-in-out;
+}
+@keyframes counterZoom {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
 
-        /* ✅ Achievements with Counter Effect */
-        .achievements {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 50px 10%;
-            background: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .achievement {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .achievement span {
-            font-size: 40px;
-            color: #d40000;
-        }
+/* Team Section */
+.team {
+    padding: 50px 10%;
+    text-align: center;
+}
+.team h2 {
+    font-size: 32px;
+    color: #d40000;
+    margin-bottom: 30px;
+}
+.team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.team-member {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+.team-member img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.team-member h3 { font-size: 18px; color: #d40000; }
+.team-member p { font-size: 14px; color: #555; }
+.team-member.show {
+    transform: translateY(0);
+    opacity: 1;
+}
 
-        /* ✅ Team Section */
-        .team {
-            padding: 50px 10%;
-            text-align: center;
-        }
-        .team h2 {
-            font-size: 32px;
-            color: #d40000;
-            margin-bottom: 30px;
-        }
-        .team-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .team-member {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            transform: translateY(50px);
-            opacity: 0;
-            transition: all 1s ease-in-out;
-        }
-        .team-member img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        .team-member h3 { font-size: 18px; color: #d40000; }
-        .team-member p { font-size: 14px; color: #555; }
-
-        /* ✅ Office Section */
-        .office {
-            padding: 50px 10%;
-            background: white;
-            text-align: center;
-        }
-        .office h2 {
-            font-size: 32px;
-            color: #d40000;
-            margin-bottom: 20px;
-        }
-        .office img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .office p {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        .location-btn {
-            background: #d40000;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        /* ✅ Animations */
-        .team-member.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .mission-vision { flex-direction: column; }
-            .achievements { flex-direction: column; gap: 20px; }
-            .team-grid { flex-direction: column; }
-        }
+/* Office Section */
+.office {
+    padding: 50px 10%;
+    background: white;
+    text-align: center;
+}
+.office h2 {
+    font-size: 32px;
+    color: #d40000;
+    margin-bottom: 20px;
+}
+.office img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.office p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+.location-btn {
+    background: #d40000;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
         
         
         /* Contact Section */
