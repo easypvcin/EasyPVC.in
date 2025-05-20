@@ -396,9 +396,11 @@ h1 {
   }
   
   function hideLoader() {
-    document.getElementById("skeleton-loader").style.display = "none";
+  const skeleton = document.getElementById("skeleton-loader");
+  if (skeleton) {
+    skeleton.style.display = "none";
   }
-  
+}
   function showError(message) {
     const errorElem = document.getElementById("errorMessage");
     errorElem.textContent = message;
@@ -491,17 +493,17 @@ h1 {
   document.body.appendChild(loader);
   
   // Create receipt layout
-  const container = document.createElement("div");
-  container.style.padding = "20px";
-  container.style.maxWidth = "700px";
-  container.style.margin = "20px auto";
-  container.style.fontFamily = "Arial, sans-serif";
-  container.style.background = "#fff";
-  container.style.border = "1px solid #ddd";
-  container.style.borderRadius = "8px";
-  container.style.color = "#333";
+  const receiptContainer = document.createElement("div");
+  receiptContainer.style.padding = "20px";
+  receiptContainer.style.maxWidth = "700px";
+  receiptContainer.style.margin = "20px auto";
+  receiptContainer.style.fontFamily = "Arial, sans-serif";
+  receiptContainer.style.background = "#fff";
+  receiptContainer.style.border = "1px solid #ddd";
+  receiptContainer.style.borderRadius = "8px";
+  receiptContainer.style.color = "#333";
   
-  container.innerHTML = `
+  receiptContainer.innerHTML = `
     <div style="text-align: center; margin-bottom: 25px;">
       <img src="./img/logo.png" alt="Easy PVC Logo" style="height: 70px; margin-bottom: 10px;">
       <h1 style="margin: 0; color: #d40000; font-size: 28px;">Easy PVC</h1>
@@ -514,16 +516,16 @@ h1 {
 
     <table style="width: 100%; font-size: 14px; border-collapse: collapse; margin-bottom: 30px;">
       <tbody>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order ID:</strong></td><td style="padding: 8px;">${orderId}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Full Name:</strong></td><td style="padding: 8px;">${order.fullName}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${order.mobile}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Product Name:</strong></td><td style="padding: 8px;">${order.name}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Price:</strong></td><td style="padding: 8px;">${order.price}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Shipping Address:</strong></td><td style="padding: 8px;">${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment ID:</strong></td><td style="padding: 8px;">${order.paymentId}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment Status:</strong></td><td style="padding: 8px;">${order.paymentStatus}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword}</td></tr>
-        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order Time:</strong></td><td style="padding: 8px;">${order.createdAt}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Order ID:</strong></td><td style="padding: 8px;">${orderId}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Full Name:</strong></td><td style="padding: 8px;">${order.fullName}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${order.mobile}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Product Name:</strong></td><td style="padding: 8px;">${order.name}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Price:</strong></td><td style="padding: 8px;">${order.price}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Shipping Address:</strong></td><td style="padding: 8px;">${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Payment ID:</strong></td><td style="padding: 8px;">${order.paymentId}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Payment Status:</strong></td><td style="padding: 8px;">${order.paymentStatus}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword}</td></tr>
+        <tr><td style="padding: 8px;"><strong>Order Time:</strong></td><td style="padding: 8px;">${order.createdAt}</td></tr>
         <tr><td style="padding: 8px;"><strong>User ID:</strong></td><td style="padding: 8px;">${order.uid}</td></tr>
       </tbody>
     </table>
@@ -534,18 +536,25 @@ h1 {
     </div>
   `;
   
-  html2pdf().from(container).set({
+  document.body.appendChild(receiptContainer);
+  
+  html2pdf().from(receiptContainer).set({
     margin: 10,
     filename: `EasyPVC_Receipt_${orderId}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true },
     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  }).save().then(() => {
-    document.body.removeChild(container);
-    document.body.removeChild(loader);
-  });
-};
-  
+}).save().then(() => {
+  if (document.body.contains(receiptContainer)) {
+    document.body.removeChild(receiptContainer);
+  }
+  const loaderElement = document.getElementById("receiptLoader");
+  if (loaderElement) {
+    document.body.removeChild(loaderElement);
+  }
+}); // closes .then()
+
+}; // closes window.generateReceipt function
   window.onload = fetchOrders;
 </script>
     <script type="module" src="./js/auth.js">./js/auth.js</script>  
