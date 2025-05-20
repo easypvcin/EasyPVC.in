@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 count++;
                 document.getElementById(id).textContent = count;
                 if (count >= target) clearInterval(interval);
-            }, 0.000001);
+            }, 1);
         }
         counterEffect("years", 5);
-        counterEffect("prints", 50000);
-        counterEffect("clients", 10000);
+        counterEffect("prints", 1200);
+        counterEffect("clients", 950);
 
         // ✅ Team Animation
         window.addEventListener("scroll", function() {
