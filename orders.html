@@ -504,35 +504,32 @@ h1 {
   receiptContainer.style.color = "#333";
   
   receiptContainer.innerHTML = `
-    <div style="text-align: center; margin-bottom: 25px;">
+    <div style="text-align: center; margin-bottom: 20px;">
       <img src="./img/logo.png" alt="Easy PVC Logo" style="height: 70px; margin-bottom: 10px;">
-      <h1 style="margin: 0; color: #d40000; font-size: 28px;">Easy PVC</h1>
-      <p style="margin: 2px 0; font-size: 14px; font-weight: 500;">Founder: Raj Sharma</p>
+      <h2 style="margin: 0; color: #d40000;">Easy PVC</h2>
+      <p style="margin: 2px 0; font-size: 14px;">Founder: Raj Sharma</p>
       <p style="margin: 2px 0; font-size: 13px;">GSTIN: 27ABCDE1234F1Z5 | contact@easypvc.in</p>
-      <hr style="margin-top: 15px; border: none; height: 1px; background: #ccc;">
+      <hr style="margin-top: 15px; border-color: #ccc;">
     </div>
 
-    <h2 style="font-size: 22px; margin-bottom: 15px; text-align: center; color: #333;">Order Receipt</h2>
-
-    <table style="width: 100%; font-size: 14px; border-collapse: collapse; margin-bottom: 30px;">
-      <tbody>
-        <tr><td style="padding: 8px;"><strong>Order ID:</strong></td><td style="padding: 8px;">${orderId}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Full Name:</strong></td><td style="padding: 8px;">${order.fullName}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${order.mobile}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Product Name:</strong></td><td style="padding: 8px;">${order.name}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Price:</strong></td><td style="padding: 8px;">${order.price}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Shipping Address:</strong></td><td style="padding: 8px;">${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Payment ID:</strong></td><td style="padding: 8px;">${order.paymentId}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Payment Status:</strong></td><td style="padding: 8px;">${order.paymentStatus}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword}</td></tr>
-        <tr><td style="padding: 8px;"><strong>Order Time:</strong></td><td style="padding: 8px;">${order.createdAt}</td></tr>
-        <tr><td style="padding: 8px;"><strong>User ID:</strong></td><td style="padding: 8px;">${order.uid}</td></tr>
-      </tbody>
+    <h3 style="margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Order Receipt</h3>
+    <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+      <tr><td><strong>Order ID:</strong></td><td>${orderId}</td></tr>
+      <tr><td><strong>Full Name:</strong></td><td>${order.fullName}</td></tr>
+      <tr><td><strong>Mobile:</strong></td><td>${order.mobile}</td></tr>
+      <tr><td><strong>Product Name:</strong></td><td>${order.name}</td></tr>
+      <tr><td><strong>Price:</strong></td><td>${order.price}</td></tr>
+      <tr><td><strong>Shipping Address:</strong></td><td>${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
+      <tr><td><strong>Payment ID:</strong></td><td>${order.paymentId}</td></tr>
+      <tr><td><strong>Payment Status:</strong></td><td>${order.paymentStatus}</td></tr>
+      <tr><td><strong>Password:</strong></td><td>${order.pdfPassword}</td></tr>
+      <tr><td><strong>Order Time:</strong></td><td>${order.createdAt}</td></tr>
+      <tr><td><strong>User ID:</strong></td><td>${order.uid}</td></tr>
     </table>
 
-    <div style="margin-top: 20px; text-align: center;">
-      <p style="font-size: 16px; font-weight: 600; color: #444;">Thank you for shopping with <span style="color: #d40000;">Easy PVC</span>!</p>
-      <p style="font-size: 14px; color: #666;">We truly appreciate your trust and look forward to your next visit.</p>
+    <div style="margin-top: 30px; text-align: center;">
+      <p style="font-size: 15px; font-weight: bold;">Thank you for shopping with Easy PVC!</p>
+      <p style="font-size: 13px; color: #666;">We appreciate your trust in us and look forward to serving you again.</p>
     </div>
   `;
   
