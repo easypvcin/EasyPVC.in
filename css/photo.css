@@ -504,11 +504,28 @@ canvas {
     padding: 0 10px; /* ✅ Add some spacing */
 }
 
-#scrollToAddress {
-  transition: opacity 0.5s ease;
+#scrollToOrder {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
-#scrollToAddress.hidden {
-  opacity: 0;
-  pointer-events: none;
+#scrollToOrder i {
+    font-size: 22px;
+}
+
+/* Hide the button completely */
+#scrollToOrder.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
 }
