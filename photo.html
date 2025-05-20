@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passport Size Photo Print</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="./css/photo.css" type="text/css" media="all" />
 </head>
 <body>
@@ -11,7 +12,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <img src="./img/logo.png" alt="Print 420 Logo">
+            <img src="./img/logo.png" alt="EasyPVC Logo">
              <span id="userEmail" style="display:none; font-weight: bold;"></span>
         </div>
         <ul class="nav-links">
@@ -31,109 +32,72 @@
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </nav>
 
-    <!-- Product Info -->
-    <div class="product-container">
-        <img id="previewImage" src="https://codesparshofficial.github.io/Print420/img10.png" alt="Passport Photo">
-        <div class="product-info">
-            <h2>Passport Size Photo</h2>
-            <p>Upload your photo and get 42 passport size photos printed on an A4 sheet.</p>
-            <p class="price">₹99/42 Photos</p>
-            <br>
-            <label><strong>Upload Your Photo</strong></label>
-            <input type="file" id="fileInput" accept="image/*">
-        </div>
+  <!-- ✅ Product Section with Full-width Main Image and Thumbnails -->
+<div class="product-container">
+  <div class="product-gallery">
+    <img id="mainImage" class="main-image" src="./img/pass1.png" alt="Aadhaar PVC Card">
+<div class="thumbnail-wrapper">
+  <div class="thumbnail-container">
+    <div class="thumbnail-row">
+      <img src="./img/pass1.png" />
+      <img src="./img/pass2.png" alt="Thumbnail 2" />
+      <img src="./img/pass3.png" />
     </div>
+  </div>
+</div>
+  </div>
+  
+<div class="product-info">
+  <h2>Passport Size Photo</h2>
+  <p>Get 42 high-quality passport size photos delivered to your doorstep — all for just ₹120!</p>
+  <p class="price">Print + GST + Delivery = ₹120</p>
+  
+  <ul>
+    <li>Printed on premium photo paper for sharp and clear results</li>
+    <li>Ideal for official documents, job applications, ID cards, and more</li>
+    <li>Delivered anywhere in India via Speed Post</li>
+    <li>Expected delivery: 5–7 working days</li>
+  </ul>
+  
+  <h4 style="margin-top: 20px; color: green;">What’s in the Package?</h4>
+  <ul>
+    <li>42x Passport Size Photos (Recent Upload)</li>
+    <li>1x Free Plastic Sleeves to keep your photos safe</li>
+  </ul>
+</div>
+
+<button id="scrollToOrder" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+  <i class="fas fa-arrow-down" style="font-size: 22px;"></i>
+</button>
 
     <!-- Preview Section -->
     <div class="preview-container">
-        <h2>Preview</h2>
-        <canvas id="collageCanvas"></canvas>
+      <h2>Preview</h2>
+      <canvas id="collageCanvas"></canvas>
     </div>
-
-    <!-- Shipping Address Form -->
-    <div class="shipping-container">
-        <h2>Shipping Address</h2>
-        <form id="shippingForm">
-            <input type="text" id="fullName" placeholder="Full Name" required>
-            <input type="text" id="address" placeholder="Address" required>
-            <input type="text" id="city" placeholder="City" required>
-            <input type="text" id="state" placeholder="State" required>
-            <input type="number" id="pincode" placeholder="Pincode" required>
-            <input type="tel" id="mobile" placeholder="Mobile Number" required>
-        </form>
-    </div>
-
-    <!-- Order Now Button -->
-    <button id="orderBtn" class="sticky-order-btn" disabled>Checkout</button>
-
-
-
-<!-- Footer Section -->
-<footer>
-  <div class="footer-overlay"></div> <!-- Animated Background Overlay -->
+    
+<!-- Shipping Address Form -->
+<div class="shipping-container">
+  <h2>Enter Your Order Details</h2>
+  <form id="shippingForm">
+    <div>
+       <label><strong>Upload Your Passport Photo</strong></label>
+        <input type="file" id="fileInput" accept="image/*">
+    </div> <br>
+    <input type="text" id="fullName" placeholder="Full Name" required>
+    <input type="text" id="address" placeholder="Address" required>
+    <input type="text" id="city" placeholder="City" required>
+    <input type="text" id="state" placeholder="State" required>
+    <input type="number" id="pincode" placeholder="Pincode" required>
+    <input type="tel" id="mobile" placeholder="Mobile Number" required>
+  </form>
   
-  <!-- Top Section with Title & Description -->
-  <div class="footer-intro">
-    <h2>Print420.in By Mr.Ravi Kumar Singh</h2>
-    <div class="underline"></div>
-    <p>Providing high-quality ID card printing, passport photos, and document printing services with fast delivery.</p>
-  </div>
-  
-  <div class="footer-container">
-    
-    <!-- Left Section - Quick Links -->
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="index.html#faqs">FAQs</a></li>
-        <li><a href="index.html#testimonials">Testimonials</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    
-    <!-- Middle Section - Services -->
-    <div class="footer-section">
-      <h3>Our Services</h3>
-      <ul>
-        <li><a href="#">DL Card Printing</a></li>
-        <li><a href="#">RC Card Printing</a></li>
-        <li><a href="#">PAN Card Printing</a></li>
-        <li><a href="#">Voter ID Printing</a></li>
-        <li><a href="#">Passport Size Photos</a></li>
-        <li><a href="#">Aadhar Card Printing</a></li>
-        <li><a href="#">Ration Card Printing</a></li>
-        <li><a href="#">Ayushman Card Printing</a></li>
-        <li><a href="#">E-Shram Card Printing</a></li>
-        <li><a href="#">ABC Card Printing</a></li>
-        <li><a href="#">UAN Card Printing</a></li>
-        
-      </ul>
-    </div>
-    
-    <!-- Right Section - Contact Info -->
-    <div class="footer-section">
-      <h3>Contact Information</h3>
-      <p><a href="tel:+917061171033">+91 70611 71033</a></p>
-      <p><a href="mailto:pvcprint420@gmail.com">pvcprint420@gmail.com</a></p>
-      <p>Akhauripur gola, Chausa, Buxar, Bihar -802114</p>
-      
-      <!-- Social Media Icons -->
-      <div class="social-icons">
-        <a href="https://www.facebook.com/share/17tV2vj9id/"><img src="https://img.icons8.com/ios-filled/50/FF0000/facebook-new.png" alt="Facebook"></a>
-        <a href="https://www.instagram.com/ravivlogs420?igsh=MWI3amdrN2hhaTE4ZA=="><img src="https://img.icons8.com/ios-filled/50/FF0000/instagram.png" alt="Instagram"></a>
-        <a href="https://youtube.com/@ravivlogs420?si=cqnBWtovZ2E4j4t9"><img src="https://img.icons8.com/ios-filled/50/FF0000/youtube.png" alt="YouTube"></a>
-      </div>
-    </div>
-    
-  </div>
-  
-  <!-- Bottom Section -->
-  <div class="footer-bottom">
-    <p>&copy; 2025 Print 420. All Rights Reserved.</p>
-  </div>
-</footer>
+  <!-- Order Now Button -->
+  <button id="orderBtn" class="sticky-order-btn" disabled>Checkout</button>
+</div>
+</div>
+
+
   <script>
 //menu bar 
         function toggleMenu() {
@@ -148,7 +112,66 @@
                 menuIcon.innerHTML = "☰";
             }
         }
+      
+      
+      //SCROLLING 
+  
+  const scrollBtn = document.getElementById("scrollToOrder");
+  const targetContainer = document.querySelector(".shipping-container");
+
+  // Click to scroll and hide button
+  scrollBtn.addEventListener("click", () => {
+    targetContainer.scrollIntoView({ behavior: "smooth" });
+    scrollBtn.classList.add("hidden");
+  });
+
+  // IntersectionObserver to track visibility
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        // If container not in view, show button
+        if (!entry.isIntersecting) {
+          scrollBtn.classList.remove("hidden");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+
+  if (targetContainer) {
+    observer.observe(targetContainer);
+  }
+  
+  ///thumbnail changer 
+  document.addEventListener('DOMContentLoaded', function() {
+
+    const mainImage = document.getElementById('mainImage');
+
+    const thumbnails = document.querySelectorAll('.thumbnail-row img');
+    
+    thumbnails.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        // Remove active class from all thumbnails
+        thumbnails.forEach((img) => img.classList.remove('active'));
         
+        // Add active class to clicked thumbnail
+        thumb.classList.add('active');
+        
+        // Fade out main image
+        mainImage.style.opacity = 0;
+        
+        // Change image source after a short delay
+        setTimeout(() => {
+          mainImage.src = thumb.src;
+          
+          // Fade in main image
+          mainImage.style.opacity = 1;
+        }, 200);
+      });
+    });
+  });
         
 document.getElementById('fileInput').addEventListener('change', handleFile);
 document.getElementById('orderBtn').addEventListener('click', saveOrderData);
@@ -157,12 +180,15 @@ function handleFile(event) {
   const file = event.target.files[0];
   if (file) {
     document.getElementById('orderBtn').disabled = false; // ✅ Enable button
-
+    
     const reader = new FileReader();
     reader.onload = function(e) {
       let img = new Image();
       img.src = e.target.result;
       img.onload = function() {
+        // ✅ Show preview container on successful image load
+        document.querySelector('.preview-container').style.display = 'block';
+        
         generateCollage(img);
       };
     };
@@ -192,40 +218,61 @@ function generateCollage(img) {
 }
   </script>
 <script>
-document.getElementById('orderBtn').addEventListener('click', function () {
-    const orderDetails = {
-        name: "Passport Size Photo",
-        price: "₹99",
-        type: "42 Photos on A4 Sheet",
-        fullName: document.getElementById("fullName").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        state: document.getElementById("state").value,
-        pincode: document.getElementById("pincode").value,
-        mobile: document.getElementById("mobile").value
-    };
-
-    const fileInput = document.getElementById("fileInput").files[0];
-
-    if (!fileInput) {
-        alert("❌ Please upload your passport photo!");
-        return;
-    }
-
-    // ✅ Convert Image to Base64
-    const reader = new FileReader();
-    reader.readAsDataURL(fileInput);
-    reader.onload = function () {
-        orderDetails.image1 = reader.result; // Save base64 image in object
-
-        // ✅ Save Order Details in sessionStorage
-        sessionStorage.setItem("orderDetails", JSON.stringify(orderDetails));
-
-        // ✅ Redirect to Checkout Page
-        window.location.href = "checkout.html";
-    };
+document.getElementById('orderBtn').addEventListener('click', function() {
+  const fullName = document.getElementById("fullName").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const state = document.getElementById("state").value.trim();
+  const pincode = document.getElementById("pincode").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const fileInput = document.getElementById("fileInput").files[0];
+  
+  // Basic Validation
+  if (!fullName || !address || !city || !state || !pincode || !mobile) {
+    alert("⚠️ Please fill in all the required fields!");
+    return;
+  }
+  
+  if (!/^\d{6}$/.test(pincode)) {
+    alert("⚠️ Please enter a valid 6-digit PIN code.");
+    return;
+  }
+  
+  if (!/^[6-9]\d{9}$/.test(mobile)) {
+    alert("⚠️ Please enter a valid 10-digit mobile number.");
+    return;
+  }
+  
+  if (!fileInput) {
+    alert("⚠️ Please upload your passport photo!");
+    return;
+  }
+  
+  const orderDetails = {
+    name: "Passport Size Photo",
+    price: "₹120",
+    type: "42 Photos on A4 Sheet",
+    fullName,
+    address,
+    city,
+    state,
+    pincode,
+    mobile
+  };
+  
+  // Convert Image to Base64
+  const reader = new FileReader();
+  reader.readAsDataURL(fileInput);
+  reader.onload = function() {
+    orderDetails.image1 = reader.result;
+    
+    // Save to sessionStorage
+    sessionStorage.setItem("orderDetails", JSON.stringify(orderDetails));
+    
+    // Redirect to Checkout
+    window.location.href = "checkout.html";
+  };
 });
-
 </script>
 
 <script type="module" src="./js/auth.js"></script>
