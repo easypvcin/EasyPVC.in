@@ -480,21 +480,16 @@ h1 {
   const loader = document.createElement("div");
   loader.id = "receiptLoader";
   loader.innerHTML = `
-  <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-    <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
-      <div style="border: 4px solid #f3f3f3; border-top: 4px solid #d40000; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: auto;"></div>
-      <p style="margin-top: 10px;">Generating Receipt...</p>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+      <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
+        <div style="border: 4px solid #f3f3f3; border-top: 4px solid #d40000; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: auto;"></div>
+        <p style="margin-top: 10px;">Generating Receipt...</p>
+      </div>
     </div>
-  </div>
-  <style>
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-  </style>
-`;
+    <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
+  `;
   document.body.appendChild(loader);
-
+  
   // Create receipt layout
   const container = document.createElement("div");
   container.style.padding = "20px";
@@ -505,53 +500,51 @@ h1 {
   container.style.border = "1px solid #ddd";
   container.style.borderRadius = "8px";
   container.style.color = "#333";
-
+  
   container.innerHTML = `
-  <div style="text-align: center; margin-bottom: 25px;">
-    <img src="./img/logo.png" alt="Easy PVC Logo" style="height: 70px; margin-bottom: 10px;">
-    <h1 style="margin: 0; color: #d40000; font-size: 28px;">EasyPVC.In</h1>
-    <p style="margin: 2px 0; font-size: 14px; font-weight: 500;">Founder: Anil Kumar</p>
-    <p style="margin: 2px 0; font-size: 13px;">+91 9588581750 | easypvc.in@gmail.com</p>
-    <hr style="margin-top: 15px; border: none; height: 1px; background: #ccc;">
-  </div>
+    <div style="text-align: center; margin-bottom: 25px;">
+      <img src="./img/logo.png" alt="Easy PVC Logo" style="height: 70px; margin-bottom: 10px;">
+      <h1 style="margin: 0; color: #d40000; font-size: 28px;">Easy PVC</h1>
+      <p style="margin: 2px 0; font-size: 14px; font-weight: 500;">Founder: Raj Sharma</p>
+      <p style="margin: 2px 0; font-size: 13px;">GSTIN: 27ABCDE1234F1Z5 | contact@easypvc.in</p>
+      <hr style="margin-top: 15px; border: none; height: 1px; background: #ccc;">
+    </div>
 
-  <h2 style="font-size: 22px; margin-bottom: 15px; text-align: center; color: #333;">Order Receipt</h2>
+    <h2 style="font-size: 22px; margin-bottom: 15px; text-align: center; color: #333;">Order Receipt</h2>
 
-  <table style="width: 100%; font-size: 14px; border-collapse: collapse; margin-bottom: 30px;">
-    <tbody>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order ID:</strong></td><td style="padding: 8px;">${orderId}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Full Name:</strong></td><td style="padding: 8px;">${order.fullName}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${order.mobile}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Product Name:</strong></td><td style="padding: 8px;">${order.name}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Price:</strong></td><td style="padding: 8px;">${order.price}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Shipping Address:</strong></td><td style="padding: 8px;">${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment ID:</strong></td><td style="padding: 8px;">${order.paymentId}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment Status:</strong></td><td style="padding: 8px;">${order.paymentStatus}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order Time:</strong></td><td style="padding: 8px;">${order.createdAt}</td></tr>
-      <tr><td style="padding: 8px;"><strong>User ID:</strong></td><td style="padding: 8px;">${order.uid}</td></tr>
-    </tbody>
-  </table>
+    <table style="width: 100%; font-size: 14px; border-collapse: collapse; margin-bottom: 30px;">
+      <tbody>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order ID:</strong></td><td style="padding: 8px;">${orderId}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Full Name:</strong></td><td style="padding: 8px;">${order.fullName}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${order.mobile}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Product Name:</strong></td><td style="padding: 8px;">${order.name}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Price:</strong></td><td style="padding: 8px;">${order.price}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Shipping Address:</strong></td><td style="padding: 8px;">${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment ID:</strong></td><td style="padding: 8px;">${order.paymentId}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment Status:</strong></td><td style="padding: 8px;">${order.paymentStatus}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword}</td></tr>
+        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order Time:</strong></td><td style="padding: 8px;">${order.createdAt}</td></tr>
+        <tr><td style="padding: 8px;"><strong>User ID:</strong></td><td style="padding: 8px;">${order.uid}</td></tr>
+      </tbody>
+    </table>
 
-  <div style="margin-top: 20px; text-align: center;">
-    <p style="font-size: 16px; font-weight: 600; color: #444;">Thank you for your trust with <span style="color: #d40000;">EasyPVC.In</span>!</p>
-    <p style="font-size: 14px; color: #666;">We truly appreciate your trust and look forward to your next visit.</p>
-  </div>
-`;
-
-  // Generate Pdf 
-document.body.appendChild(container); // Append the receipt to the DOM
-
-html2pdf().from(container).set({
-  margin: 10,
-  filename: `EasyPVC_Receipt_${orderId}.pdf`,
-  image: { type: 'jpeg', quality: 0.98 },
-  html2canvas: { scale: 2, useCORS: true },
-  jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-}).save().then(() => {
-  document.body.removeChild(container);
-  document.body.removeChild(loader);
-});
+    <div style="margin-top: 20px; text-align: center;">
+      <p style="font-size: 16px; font-weight: 600; color: #444;">Thank you for shopping with <span style="color: #d40000;">Easy PVC</span>!</p>
+      <p style="font-size: 14px; color: #666;">We truly appreciate your trust and look forward to your next visit.</p>
+    </div>
+  `;
+  
+  html2pdf().from(container).set({
+    margin: 10,
+    filename: `EasyPVC_Receipt_${orderId}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).save().then(() => {
+    document.body.removeChild(container);
+    document.body.removeChild(loader);
+  });
+};
   
   window.onload = fetchOrders;
 </script>
