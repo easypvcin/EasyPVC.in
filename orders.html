@@ -168,32 +168,52 @@ h1 {
   background-color: #f0f0f0;
 }
     
-.btn {
-  display: block;
+.button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
   margin-top: 10px;
+}
+
+.btn, .track-btn {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Receipt Button */
+.btn {
   background: #d40000;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
-  width: 100%;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s ease;
 }
 
-.btn:hover {
+/*.btn:hover {
   background: #a00000;
 }
+*/
 
-/* Search */
-#searchInput {
-  max-width: 400px;
-  margin: 0 auto 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  display: block;
+/* Track Button */
+.track-btn {
+  background: white;
+  color: #d40000;
+  border: 2px solid #d40000;
+  text-decoration: none;
+}
+
+/*
+.track-btn:hover {
+  background: #d40000;
+  color: white;
+}*/
+
+.temp-hover {
+  background: #a00000 !important;
+  color: white !important;
 }
 
 /* Footer */
@@ -467,17 +487,21 @@ h1 {
             <div class="order-card" data-order-id="${doc.id}">
               ${fileHTML}
 <div class="order-details">
-  <p>
+  <!-- HTML: for each order card -->
+<p>
   <strong>Tracking ID:</strong>
-  <span id="trackingId">${order.trackingId}</span>
-  <button onclick="copyTrackingId()" class="copy-btn" title="Copy">
+  <span class="tracking-id">
+    ${order.trackingId || "Pending... Please Wait!"}
+  </span>
+  <button onclick="copyTrackingId(this)" class="copy-btn" title="Copy">
     <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="#555">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z"/>
+      <path d="M0 0h24v24H0z" fill="none" />
+      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 18H8V7h11v16z" />
     </svg>
   </button>
 </p>
   <p><strong>Order ID:</strong> ${doc.id}</p>
+  <p><strong>Order Status:</strong>${order.status || "Under Process"}</p>
   <p><strong>Full Name:</strong> ${order.fullName}</p>
   <p><strong>Mobile:</strong> ${order.mobile}</p>
   <p><strong>Product Name:</strong> ${order.name}</p>
@@ -485,11 +509,18 @@ h1 {
   <p><strong>Address:</strong> ${order.address}, ${order.city}, ${order.state}, ${order.pincode}</p>
   <p><strong>Payment ID:</strong> ${order.paymentId}</p>
   <p><strong>Payment Status:</strong> ${order.paymentStatus}</p>
-  <p><strong>Password:</strong> ${order.pdfPassword}</p>
+  <p><strong>Password:</strong> ${order.pdfPassword || "Not Required"}</p>
   <p><strong>Order Time:</strong> ${order.createdAt}</p>
   <p><strong>UID:</strong> ${order.uid}</p>
 </div>
-              <button class="btn" onclick='generateReceipt("${doc.id}", ${JSON.stringify(order)})'>📄 Download Receipt</button>
+            <div class="button-container">
+  <button class="btn" onclick='triggerHoverEffect(this); generateReceipt("${doc.id}", ${JSON.stringify(order)});'>
+    🧾 Receipt
+  </button>
+  <a href="https://www.indiapost.gov.in/_layouts/15/dop.portal.tracking/trackconsignment.aspx" target="_blank" class="track-btn">
+    Track Order
+  </a>
+</div>
             </div>`;
         });
         
@@ -598,16 +629,38 @@ h1 {
                 menuIcon.innerHTML = "☰";
             }
         }</script>
-  <script>
-  function copyTrackingId() {
-    const trackingText = document.getElementById("trackingId").innerText;
-    navigator.clipboard.writeText(trackingText).then(() => {
-      alert("Tracking ID copied!");
-    }).catch(err => {
-      alert("Failed to copy!");
-      console.error(err);
-    });
+        <script>
+// JavaScript: page ke anywhere ek baar include kar dein
+function copyTrackingId(buttonElem) {
+  // button ke parent <p> ke andar jo .tracking-id span hai, usko select karo
+  const span = buttonElem.parentElement.querySelector('.tracking-id');
+  const trackingText = span.innerText.trim();
+  
+  if (!trackingText || trackingText.startsWith("Pending")) {
+    alert("To be generated!");
+    return;
   }
-  </script>
+  
+  navigator.clipboard.writeText(trackingText)
+    .then(() => {
+      // Copy successful — icon color temporarily change karke feedback de sakte hain
+      const svg = buttonElem.querySelector('svg path:last-of-type');
+      svg.setAttribute('fill', '#28a745'); // green
+      setTimeout(() => svg.setAttribute('fill', '#555'), 1000);
+      alert("Tracking ID copied!");
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Copy failed. Please try again.");
+    });
+}
+//hover of button 
+  function triggerHoverEffect(btn) {
+    btn.classList.add("temp-hover");
+    setTimeout(() => {
+      btn.classList.remove("temp-hover");
+    }, 2000); // 2 seconds
+  }
+</script>
 </body>
   </html>
