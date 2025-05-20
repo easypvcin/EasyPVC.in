@@ -291,9 +291,12 @@ let orderToSave = {
   timestamp: new Date().toISOString()
 };
 
+// PDF hai to URL daalo aur base64 hata do
 if (orderDetails.pdfBase64) {
   orderToSave.pdfUrl = uploadedUrls[0];
+  delete orderToSave.pdfBase64; // Important to avoid saving large data
 } else {
+  // Images daalo
   orderToSave.image1 = uploadedUrls[0];
   orderToSave.image2 = uploadedUrls[1] || "No second image";
 }
