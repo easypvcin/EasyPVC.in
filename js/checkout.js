@@ -182,16 +182,29 @@ if (orderDetails.pdfBase64) {
     }
   }
 }
-else if (orderDetails.image1 && orderDetails.image2) {
-      // ✅ Images Upload detected
-      const img1 = document.getElementById("orderImage1");
-      img1.src = orderDetails.image1;
-      img1.style.display = "block";
-      
-      const img2 = document.getElementById("orderImage2");
-      img2.src = orderDetails.image2;
-      img2.style.display = "block";
-    }
+// …पहले का कोड (PDF क्रिया वाली शाख़)
+
+else if (orderDetails.image1 || orderDetails.image2) {
+  // कम से कम एक इमेज मिली है
+  const img1 = document.getElementById("orderImage1");
+  const img2 = document.getElementById("orderImage2");
+
+  // अगर image1 है तो उसे दिखाओ, नहीं तो छुपाओ
+  if (orderDetails.image1) {
+    img1.src = orderDetails.image1;
+    img1.style.display = "block";
+  } else {
+    img1.style.display = "none";
+  }
+
+  // अगर image2 है तो उसे दिखाओ, नहीं तो छुपाओ
+  if (orderDetails.image2) {
+    img2.src = orderDetails.image2;
+    img2.style.display = "block";
+  } else {
+    img2.style.display = "none";
+  }
+}
     
     stopLoader();
   }, 1000);
