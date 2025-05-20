@@ -573,7 +573,7 @@ h1 {
 
   <table style="width: 100%; font-size: 14px; border-collapse: collapse; margin-bottom: 30px;">
     <tbody>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Tracking ID:</strong></td><td style="padding: 8px;">${order.trackingId}</td></tr>
+      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Tracking ID:</strong></td><td style="padding: 8px;">${order.trackingId || "To be generated!"}</td></tr>
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order ID:</strong></td><td style="padding: 8px;">${orderId}</td></tr>
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Full Name:</strong></td><td style="padding: 8px;">${order.fullName}</td></tr>
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Mobile:</strong></td><td style="padding: 8px;">${order.mobile}</td></tr>
@@ -582,7 +582,7 @@ h1 {
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Shipping Address:</strong></td><td style="padding: 8px;">${order.address}, ${order.city}, ${order.state}, ${order.pincode}</td></tr>
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment ID:</strong></td><td style="padding: 8px;">${order.paymentId}</td></tr>
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Payment Status:</strong></td><td style="padding: 8px;">${order.paymentStatus}</td></tr>
-      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword}</td></tr>
+      <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Password:</strong></td><td style="padding: 8px;">${order.pdfPassword || "Not Required!"}</td></tr>
       <tr style="border-bottom: 1px solid #eee;"><td style="padding: 8px;"><strong>Order Time:</strong></td><td style="padding: 8px;">${order.createdAt}</td></tr>
       <tr><td style="padding: 8px;"><strong>User ID:</strong></td><td style="padding: 8px;">${order.uid}</td></tr>
     </tbody>
