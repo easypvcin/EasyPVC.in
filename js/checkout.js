@@ -235,7 +235,7 @@ const options = {
   currency: "INR",
   name: "Easy PVC",
   description: orderDetails.name,
-  image: "https://codesparshofficial.github.io/Print420/img12.png",
+  image: "./img/logo.png",
   prefill: {
     name: orderDetails.fullName,
     email: user.email,
