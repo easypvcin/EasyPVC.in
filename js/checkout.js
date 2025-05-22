@@ -230,7 +230,7 @@ showLoader();
 // Convert Price to Paise
 const amount = parseInt(orderDetails.price.replace(/[^0-9]/g, "")) * 100;
 const options = {
-  key: "rzp_test_NfDhAFYplEhZEf",
+  key: "rzp_live_VfZEc1nrbqDHVP",
   amount: amount,
   currency: "INR",
   name: "Easy PVC",
